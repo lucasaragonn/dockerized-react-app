@@ -1,0 +1,21 @@
+#Dockerfile.dev:
+
+# base image
+FROM node:current-alpine
+
+# set working directory
+WORKDIR /app
+
+# add `//node_modules/.bin` to $PATH
+ENV PATH ./node_modules/.bin:$PATH
+
+COPY package.json ./package.json
+
+#install dependencies:
+RUN npm install
+
+#copy project files
+COPY . . 
+
+# start 
+CMD ["npm", "start"]
